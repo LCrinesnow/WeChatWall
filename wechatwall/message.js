@@ -40,6 +40,9 @@ var server = http.createServer(function(request,response){
 	}else{
 	//否则是微信给开发者服务器的POST请求
 		var postdata = "";
+		request.addListener("data",function(postchunk){
+			postdata+= postchunk;
+		}
 		request.addListener("end",function(){
 			console.log(postdata);
 			response.end('success');
