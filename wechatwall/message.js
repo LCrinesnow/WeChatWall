@@ -42,7 +42,7 @@ var server = http.createServer(function(request,response){
 		var postdata = "";
 		request.addListener("data",function(postchunk){
 			postdata+= postchunk;
-		}
+		});
 		request.addListener("end",function(){
 			console.log(postdata);
 			response.end('success');
