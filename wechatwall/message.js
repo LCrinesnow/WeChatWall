@@ -26,6 +26,7 @@ var server = http.createServer(function(request,response){
 	console.log("token-->",TOKEN);
 
 	if(checkSignature(params,TOKEN)){
+		console.log("chenggong");
 		response.end(params.echostr);
 
 	}else{
