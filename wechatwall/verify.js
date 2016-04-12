@@ -30,6 +30,7 @@ var server = http.createServer(function(request,response){
 
 	}else{
 		response.end('signature fail');
+	}
 });
 
 server.listen(PORT);
