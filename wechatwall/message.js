@@ -48,7 +48,7 @@ var server = http.createServer(function (request,response){
 			postdata += postchunk;
 			console.log(postchunk+'/////data');
 		});
-		console.log(postdata+'dfsdf');
+		// console.log(postdata+'dfsdf');
 
 		request.addListener("end",function (){
 			console.log(postdata);
