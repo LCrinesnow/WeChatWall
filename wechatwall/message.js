@@ -3,7 +3,7 @@ var http = require('http');
 var qs = require('qs');
 var crypto =require('crypto');
 var url=require('url');
-var xml2js =require('xml2js');
+// var xml2js =require('xml2js');
 
 var TOKEN = 'rinesnow';
 
@@ -50,7 +50,7 @@ var server = http.createServer(function (request,response){
 
 		request.addListener('end',function (){
 			console.log(postdata);
-			var parseString=xml2js.parseString;
+			var parseString=require('xml2js').parseString;
 			parseString(postdata,function (err, result){
 				if(!err){
 					console.log(result);
