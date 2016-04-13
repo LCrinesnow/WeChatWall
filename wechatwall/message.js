@@ -32,7 +32,7 @@ var server = http.createServer(function (request,response){
 		return;
 	// }else{
 	// 	return;
-	// }
+	}
 		console.log(request.method+'/////');
 
 	//若请求时GET，返回echostr用于通过服务器有效检验
