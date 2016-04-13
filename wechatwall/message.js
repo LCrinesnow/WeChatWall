@@ -54,11 +54,15 @@ var server = http.createServer(function (request,response){
 			parseString(postdata,function (err, result){
 				if(!err){
 					console.log(result);
+					console.log(result[0]);
 					response.end('success');
 				}
 			});
 		});
 	}
 });
+// function reply(){
+
+// }
 server.listen(PORT);
 console.log("Server running at port:"+PORT+".");
