@@ -42,6 +42,8 @@ var server = http.createServer(function(request,response){
 		var postdata = "";
 		request.addListener("data",function(postchunk){
 			postdata+= postchunk;
+			console.log(postdata+'/////data');
+
 		});
 		request.addListener("end",function(){
 			console.log(postdata);
@@ -50,6 +52,5 @@ var server = http.createServer(function(request,response){
 	}
 
 });
-
 server.listen(PORT);
 console.log("Server running at port:"+PORT+".");
