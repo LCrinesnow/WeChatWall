@@ -54,7 +54,7 @@ var server = http.createServer(function (request,response){
 			parseString(postdata,function (err, result){
 				if(!err){
 					console.log(result);
-					console.log(result.MsgType[0]);
+					console.log(result.xml.MsgType[0]);
 					response.end('success');
 				}
 			});
