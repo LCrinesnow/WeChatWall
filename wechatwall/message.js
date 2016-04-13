@@ -50,13 +50,13 @@ var server = http.createServer(function (request,response){
 
 		request.addListener('end',function (){
 			console.log(postdata);
-			var parseString=require('xml2js').parseString;
-			parseString(postdata,function (err, result){
-				if(!err){
-					console.log(result);
+			// var parseString=require('xml2js').parseString;
+			// parseString(postdata,function (err, result){
+			// 	if(!err){
+			// 		console.log(result);
 					response.end('success');
-				}
-			});
+			// }
+			// });
 		});
 	}
 });
