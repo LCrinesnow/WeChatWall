@@ -4,6 +4,7 @@ var qs = require('qs');
 var crypto =require('crypto');
 var url=require('url');
 var xml2js =require('xml2js');
+var tmpl = require('tmpl');
 
 var TOKEN = 'rinesnow';
 
@@ -54,15 +55,83 @@ var server = http.createServer(function (request,response){
 			parseString(postdata,function (err, result){
 				if(!err){
 					console.log(result);
-					console.log(result.xml.MsgType[0]);
+					// console.log(result.xml.MsgType[0]);
+					reply(result,replyText);
 					response.end('success');
 				}
 			});
 		});
 	}
 });
-// function reply(){
+function reply(result,replyText){
+	var template = '<xml>
+						<ToUserName><![CDATA[toUser]]></ToUserName>
+						<FromUserName><![CDATA[fromUser]]></FromUserName>
+						<CreateTime><![CDATA[time]]/CreateTime>
+						<MsgType><![CDATA[text]]></MsgType>
+						<Content><![CDATA[content]]></Content>
+					</xml>'
 
-// }
+	if(result.xml.MsgType[0]==='text'){
+		return tmpl(replyTmpl, {
+            toUser: result.xml.FromUserName[0],
+            fromUser: result.xml.ToUserName[0],
+            type: 'text',
+            time: Date.now(),
+            content: replyText
+        });
+	}else if (result.xml.MsgType[0] === 'image') {
+        return tmpl(replyTmpl, {
+            toUser: result.xml.FromUserName[0],
+            fromUser: result.xml.ToUserName[0],
+            type: 'image',
+            time: Date.now(),
+            content: replyText
+        });
+    } else if (result.xml.MsgType[0] === 'voice') {
+        return tmpl(replyTmpl, {
+            toUser: result.xml.FromUserName[0],
+            fromUser: result.xml.ToUserName[0],
+            type: 'voice',
+            time: Date.now(),
+            content: replyText
+        });
+    } else if (result.xml.MsgType[0] === 'video') {
+        return tmpl(replyTmpl, {
+            toUser: result.xml.FromUserName[0],
+            fromUser: result.xml.ToUserName[0],
+            type: 'video',
+            time: Date.now(),
+            content: replyText
+        });
+    } else if (result.xml.MsgType[0] === 'shortvideo') {
+        return tmpl(replyTmpl, {
+            toUser: result.xml.FromUserName[0],
+            fromUser: result.xml.ToUserName[0],
+            type: 'shortvideo',
+            time: Date.now(),
+            content: replyText
+        });
+    } else if (result.xml.MsgType[0] === 'location') {
+        return tmpl(replyTmpl, {
+            toUser: result.xml.FromUserName[0],
+            fromUser: result.xml.ToUserName[0],
+            type: 'location',
+            time: Date.now(),
+            content: replyText
+        });
+    } else if (result.xml.MsgType[0] === 'link') {
+        return tmpl(replyTmpl, {
+            toUser: result.xml.FromUserName[0],
+            fromUser: result.xml.ToUserName[0],
+            type: 'link',
+            time: Date.now(),
+            content: replyText
+        });
+    } else {
+        return '';
+    }
+
+}
 server.listen(PORT);
 console.log("Server running at port:"+PORT+".");
