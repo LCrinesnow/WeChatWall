@@ -16,7 +16,7 @@ function checkSignature(params,token){
 
 }
 
-var server = http.createServer(function(request,response){
+var server = http.createServer(function (request,response){
 	//解析URL中的Query部分，用qs模块（npm install qs）将Query解析成json
 	var url=require('url');
 	var query = url.parse(request.url).query;
@@ -40,17 +40,17 @@ var server = http.createServer(function(request,response){
 		response.end(params.echostr);
 	}else{
 	//否则是微信给开发者服务器的POST请求
+	 	//request.setEncoding('utf-8');
 		var postdata = "";
 		console.log('else'+'/////');
 
-		request.addListener("data",function(postchunk){
+		request.addListener("data",function (postchunk){
 			postdata += postchunk;
 			console.log(postchunk+'/////data');
-
 		});
 		console.log(postdata+'dfsdf');
 
-		request.addListener("end",function(){
+		request.addListener("end",function (){
 			console.log(postdata);
 			response.end('success');
 		});
