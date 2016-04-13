@@ -40,22 +40,21 @@ var server = http.createServer(function (request,response){
 		response.end(params.echostr);
 	}else{
 	//否则是微信给开发者服务器的POST请求
-	 	request.setEncoding('utf-8');
+	 	// request.setEncoding('utf-8');
 		var postdata = "";
-		console.log('else'+'/////');
+		// console.log('else'+'/////');
 
 		request.addListener("data",function (postchunk){
 			postdata += postchunk;
-			console.log(postchunk+'/////data');
+			// console.log(postchunk+'/////data');
 		});
 		// console.log(postdata+'dfsdf');
 
 		request.addListener("end",function (){
-			console.log(postdata);
+			// console.log(postdata);
 			response.end('success');
 		});
 	}
-
 });
 server.listen(PORT);
 console.log("Server running at port:"+PORT+".");
