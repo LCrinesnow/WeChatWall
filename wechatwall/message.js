@@ -33,6 +33,7 @@ var server = http.createServer(function(request,response){
 		response.end('signature fail');
 		return;
 	}
+		console.log(request.method+'/////');
 
 	//若请求时GET，返回echostr用于通过服务器有效检验
 	if(request.method=="GET"){
