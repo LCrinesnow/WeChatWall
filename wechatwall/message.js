@@ -46,12 +46,12 @@ var server = http.createServer(function (request,response){
 
 		request.addListener('data',function (postchunk){
 			postdata += postchunk;
-			// console.log(postchunk+'/////data');
+			console.log(postchunk+'/////data');
 		});
 		// console.log(postdata+'dfsdf');
 
 		request.addListener('end',function (){
-			// console.log(postdata);
+			console.log(postdata);
 			response.end('success');
 		});
 	}
