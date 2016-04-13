@@ -25,32 +25,32 @@ var server = http.createServer(function (request,response){
 	console.log(params);
 	console.log("token-->",TOKEN);
 
-	if(checkSignature(params,TOKEN)){
-		console.log("chenggong");
-		response.end(params.echostr);
-
-	}else{
+	if(!checkSignature(params,TOKEN)){
+		// console.log("chenggong");
+		// response.end(params.echostr);
 		response.end('signature fail');
 		return;
-	}
+	// }else{
+	// 	return;
+	// }
 		console.log(request.method+'/////');
 
 	//若请求时GET，返回echostr用于通过服务器有效检验
-	if(request.method=="GET"){
+	if(request.method=='GET'){
 		response.end(params.echostr);
 	}else{
 	//否则是微信给开发者服务器的POST请求
 	 	// request.setEncoding('utf-8');
-		var postdata = "";
+		var postdata = '';
 		// console.log('else'+'/////');
 
-		request.addListener("data",function (postchunk){
+		request.addListener('data',function (postchunk){
 			postdata += postchunk;
 			// console.log(postchunk+'/////data');
 		});
 		// console.log(postdata+'dfsdf');
 
-		request.addListener("end",function (){
+		request.addListener('end',function (){
 			// console.log(postdata);
 			response.end('success');
 		});
