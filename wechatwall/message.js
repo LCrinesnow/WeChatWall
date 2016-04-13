@@ -44,10 +44,12 @@ var server = http.createServer(function(request,response){
 		console.log('else'+'/////');
 
 		request.addListener("data",function(postchunk){
-			postdata+= postchunk;
-			console.log(postdata+'/////data');
+			postdata += postchunk;
+			console.log(postchunk+'/////data');
 
 		});
+		console.log(postdata);
+
 		request.addListener("end",function(){
 			console.log(postdata);
 			response.end('success');
