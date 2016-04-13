@@ -56,8 +56,9 @@ var server = http.createServer(function (request,response){
 				if(!err){
 					console.log(result);
 					// console.log(result.xml.MsgType[0]);
-					reply(result,'呵呵');
-					response.end('success');
+					
+
+					response.end(reply(result,'这是一条回复'));
 				}
 			});
 		});
