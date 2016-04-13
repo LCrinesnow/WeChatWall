@@ -56,7 +56,7 @@ var server = http.createServer(function (request,response){
 				if(!err){
 					console.log(result);
 					// console.log(result.xml.MsgType[0]);
-					reply(result,replyText);
+					reply(result,'呵呵');
 					response.end('success');
 				}
 			});
@@ -64,16 +64,16 @@ var server = http.createServer(function (request,response){
 	}
 });
 function reply(result,replyText){
-	var template = '<xml>
-						<ToUserName><![CDATA[toUser]]></ToUserName>
-						<FromUserName><![CDATA[fromUser]]></FromUserName>
-						<CreateTime><![CDATA[time]]/CreateTime>
-						<MsgType><![CDATA[text]]></MsgType>
-						<Content><![CDATA[content]]></Content>
-					</xml>'
+	var template = '<xml>'+
+						'<ToUserName><![CDATA[toUser]]></ToUserName>'+
+						'<FromUserName><![CDATA[fromUser]]></FromUserName>'+
+						'<CreateTime><![CDATA[time]]/CreateTime>'+
+						'<MsgType><![CDATA[text]]></MsgType>'+
+						'<Content><![CDATA[content]]></Content>'+
+					+'</xml>';
 
 	if(result.xml.MsgType[0]==='text'){
-		return tmpl(replyTmpl, {
+		return tmpl(template, {
             toUser: result.xml.FromUserName[0],
             fromUser: result.xml.ToUserName[0],
             type: 'text',
@@ -81,7 +81,7 @@ function reply(result,replyText){
             content: replyText
         });
 	}else if (result.xml.MsgType[0] === 'image') {
-        return tmpl(replyTmpl, {
+        return tmpl(template, {
             toUser: result.xml.FromUserName[0],
             fromUser: result.xml.ToUserName[0],
             type: 'image',
@@ -89,7 +89,7 @@ function reply(result,replyText){
             content: replyText
         });
     } else if (result.xml.MsgType[0] === 'voice') {
-        return tmpl(replyTmpl, {
+        return tmpl(template, {
             toUser: result.xml.FromUserName[0],
             fromUser: result.xml.ToUserName[0],
             type: 'voice',
@@ -97,7 +97,7 @@ function reply(result,replyText){
             content: replyText
         });
     } else if (result.xml.MsgType[0] === 'video') {
-        return tmpl(replyTmpl, {
+        return tmpl(template, {
             toUser: result.xml.FromUserName[0],
             fromUser: result.xml.ToUserName[0],
             type: 'video',
@@ -105,7 +105,7 @@ function reply(result,replyText){
             content: replyText
         });
     } else if (result.xml.MsgType[0] === 'shortvideo') {
-        return tmpl(replyTmpl, {
+        return tmpl(template, {
             toUser: result.xml.FromUserName[0],
             fromUser: result.xml.ToUserName[0],
             type: 'shortvideo',
@@ -113,7 +113,7 @@ function reply(result,replyText){
             content: replyText
         });
     } else if (result.xml.MsgType[0] === 'location') {
-        return tmpl(replyTmpl, {
+        return tmpl(template, {
             toUser: result.xml.FromUserName[0],
             fromUser: result.xml.ToUserName[0],
             type: 'location',
@@ -121,7 +121,7 @@ function reply(result,replyText){
             content: replyText
         });
     } else if (result.xml.MsgType[0] === 'link') {
-        return tmpl(replyTmpl, {
+        return tmpl(template, {
             toUser: result.xml.FromUserName[0],
             fromUser: result.xml.ToUserName[0],
             type: 'link',
