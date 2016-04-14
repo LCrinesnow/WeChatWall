@@ -71,7 +71,7 @@ function reply(result,replyText){
 	var template = '<xml>'+
 						'<ToUserName><![CDATA[{toUser}]]></ToUserName>'+
 						'<FromUserName><![CDATA[{fromUser}]]></FromUserName>'+
-						'<CreateTime><![CDATA[{time}]]/CreateTime>'+
+						'<CreateTime><{time}/CreateTime>'+
 						'<MsgType><![CDATA[{type}]]></MsgType>'+
 						'<Content><![CDATA[{content}]]></Content>'+
 					'</xml>';
