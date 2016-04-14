@@ -76,6 +76,9 @@ function reply(result,replyText){
 
 	if(result.xml.MsgType[0]==='text'){
 		console.log("shi text");
+		console.log(result.xml.FromUserName[0]);
+		console.log(result.xml.ToUserName[0]);
+
 		return tmpl(template, {
             toUser: result.xml.FromUserName[0],
             fromUser: result.xml.ToUserName[0],
