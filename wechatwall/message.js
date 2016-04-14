@@ -74,7 +74,7 @@ function reply(result,replyText){
 						'<CreateTime><![CDATA[{time}]]/CreateTime>'+
 						'<MsgType><![CDATA[{type}]]></MsgType>'+
 						'<Content><![CDATA[{content}]]></Content>'+
-					+'</xml>';
+					'</xml>';
 
 	if(result.xml.MsgType[0]==='text'){
 		console.log("shi text");
