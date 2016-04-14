@@ -67,11 +67,11 @@ var server = http.createServer(function (request,response){
 });
 function reply(result,replyText){
 	var template = '<xml>'+
-						'<ToUserName><![CDATA[toUser]]></ToUserName>'+
-						'<FromUserName><![CDATA[fromUser]]></FromUserName>'+
-						'<CreateTime><![CDATA[time]]/CreateTime>'+
-						'<MsgType><![CDATA[text]]></MsgType>'+
-						'<Content><![CDATA[content]]></Content>'+
+						'<ToUserName><![CDATA[{toUser}]]></ToUserName>'+
+						'<FromUserName><![CDATA[{fromUser}]]></FromUserName>'+
+						'<CreateTime><![CDATA[{time}]]/CreateTime>'+
+						'<MsgType><![CDATA[{text}]]></MsgType>'+
+						'<Content><![CDATA[{content}]]></Content>'+
 					+'</xml>';
 
 	if(result.xml.MsgType[0]==='text'){
