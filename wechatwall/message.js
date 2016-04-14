@@ -66,11 +66,13 @@ var server = http.createServer(function (request,response){
 	}
 });
 function reply(result,replyText){
+	//用模版填充信息。
+	//tmpl(temp,{变量1:val,变量2:val});
 	var template = '<xml>'+
 						'<ToUserName><![CDATA[{toUser}]]></ToUserName>'+
 						'<FromUserName><![CDATA[{fromUser}]]></FromUserName>'+
 						'<CreateTime><![CDATA[{time}]]/CreateTime>'+
-						'<MsgType><![CDATA[{text}]]></MsgType>'+
+						'<MsgType><![CDATA[{type}]]></MsgType>'+
 						'<Content><![CDATA[{content}]]></Content>'+
 					+'</xml>';
 
