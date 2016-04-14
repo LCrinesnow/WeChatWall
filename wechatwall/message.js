@@ -75,6 +75,7 @@ function reply(result,replyText){
 					+'</xml>';
 
 	if(result.xml.MsgType[0]==='text'){
+		console.log("shi text");
 		return tmpl(template, {
             toUser: result.xml.FromUserName[0],
             fromUser: result.xml.ToUserName[0],
@@ -84,6 +85,8 @@ function reply(result,replyText){
         });
 	}else if (result.xml.MsgType[0] === 'image') {
         return tmpl(template, {
+                			console.log("shi image");
+
             toUser: result.xml.FromUserName[0],
             fromUser: result.xml.ToUserName[0],
             type: 'image',
