@@ -57,7 +57,7 @@ var server = http.createServer(function (request,response){
 					console.log(result);
 					// console.log(result.xml.MsgType[0]);
 					
-					var back = reply(result,'这是一条回复');
+					var back = reply(result,'昨夜若非诸将力战敌军，我命休矣！');
 				    console.log(back);
 					response.end(back);
 				}
