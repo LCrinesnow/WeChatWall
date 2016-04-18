@@ -17,7 +17,7 @@ var PORT = require('./lib/config').wxPort;
 
 var http = require('http');
 var qs = require('qs');
-var TOKEN = 'yuntu';
+var TOKEN = 'rinesnow';
 
 var getUserInfo = require('./lib/user').getUserInfo;
 var replyText = require('./lib/reply').replyText; 
