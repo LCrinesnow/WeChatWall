@@ -10,7 +10,9 @@
   "license": "ISC",
   "dependencies": {
     "qs": "^6.1.0",
+    "request": "^2.72.0",
     "tmpl": "^1.0.4",
+    "ws": "^1.1.0",
     "xml2js": "^0.4.16"
   }
 }

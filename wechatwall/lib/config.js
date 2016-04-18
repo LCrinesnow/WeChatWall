@@ -2,6 +2,6 @@
 module.exports = {
   appID: 'wx75d11b4f981b1ded',
   appSecret: '7a915c525f39451f3af19407012459ad',
-  wxPort: 9259,
+  wxPort: 9529,
   wsPort: 10001
 };
