@@ -14,6 +14,7 @@
 
 var request = require('request');
 var fs = require('fs');
+var Promise = require('promise');
 
 function getToken(appID, appSecret){
   return new Promise(function(resolve, reject){
