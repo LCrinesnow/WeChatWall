@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.13.4",
     "promise": "^7.1.1",
     "qs": "^6.1.0",
     "request": "^2.72.0",
