@@ -86,12 +86,30 @@ var server = http.createServer(function (request,response){
       var parseString=xml2js.parseString;
       parseString(postdata,function (err, result){
         if(!err){
-          console.log(result);
-          // console.log(result.xml.MsgType[0]);
+          if(result.xml.MsgType[0] === 'text'){
+            getUserInfo(result.xml.FromUserName[0])
+            .then(function(userInfo){
+              //获得用户信息，合并到消息中
+              result.user = userInfo;
+//               //将消息通过websocket广播
+//               console.log('wode shuchu'+result.xml.MsgType[0]);
+//               wss.broadcast(result);
+//               wss.liu(result);
+
+//               var res = replyText(result, '消息推送成功！');
+
+//               response.end(res);
+//             })
           
-          var back = replyText(result,'昨夜若非诸将力战敌军，我命休矣！');
-            console.log(back);
-          response.end(back);
+              console.log(result);
+              // console.log(result.xml.MsgType[0]);
+              wss.broadcast(result);
+
+              var back = replyText(result,'昨夜若非诸将力战敌军，我命休矣！');
+                console.log(back);
+              response.end(back);
+            });
+          }
         }
       });
     });
