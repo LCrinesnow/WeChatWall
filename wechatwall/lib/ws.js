@@ -17,17 +17,20 @@ wss.on('connection', function connection(ws) {
 });
 
 wss.broadcast = function broadcast(data) {
-     console.log('------'+ data.xml.MsgType[0]);
-     data="hehe";
-  wss.clients.forEach(function each(client) {
+     console.log('------'+ data);
+
+     // data="hehe";
+  wss.clients.forEach(function each(client,data) {
+         console.log('------'+ data);
+
     client.send(JSON.stringify(data));
     console.log('------+++++'+JSON.stringify(data));
   });
 };
  
-wss.liu = function liu(d){
-       console.log('liu '+ d);
-}
+// wss.liu = function liu(d){
+//        console.log('liu '+ d);
+// }
 module.exports = {
   wss: wss
 };
