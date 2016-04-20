@@ -22,7 +22,7 @@
   var toend = document.getElementById('toend');
   ws.onmessage = function(evt)
   {
-    console.log('========'+evt.data);
+    console.log(evt.data);
     var msg = JSON.parse(evt.data);
     msg.user = msg.user || {};
     var userName = msg.user.nickname;
