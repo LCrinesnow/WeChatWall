@@ -15,7 +15,7 @@ var url = require('url');
 // }).listen(10002);
 // console.log('Server running at 10002');
 
-
+http.createServer( function (request, response) {  
    // 解析请求，包括文件名
    var pathname = url.parse(request.url).pathname;
    
