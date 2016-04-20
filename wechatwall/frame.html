@@ -10,6 +10,7 @@
   </style>
 </head>
 <body>
+	微信墙啊
   <a href="#end" id="toend"></a>
   <ul id="messages">
   
@@ -17,7 +18,7 @@
   <a name="end"></a>
 <script type="text/javascript">
   var msglist = document.getElementById('messages');
-  var ws = new WebSocket('ws://coderwitkey.com:10002/');
+  var ws = new WebSocket('ws://coderwitkey.com:10001/');
   var toend = document.getElementById('toend')
   ws.onmessage = function(evt)
   {
