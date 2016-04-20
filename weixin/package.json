@@ -1,0 +1,17 @@
+{
+  "name": "weixinqiang",
+  "version": "1.0.0",
+  "description": "tired",
+  "main": "weixin_ws1.js",
+  "scripts": {},
+  "author": "lost",
+  "license": "BSD",
+  "dependencies": {
+    "qs": "~6.1.0",
+    "express": "~4.13.4",
+    "xml2js": "~0.4.16",
+    "ws": "~1.1.0",
+    "tmpl": "~1.0.4",
+    "request": "~2.71.0"
+  }
+}
