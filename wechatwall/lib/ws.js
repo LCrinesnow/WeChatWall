@@ -21,7 +21,7 @@ wss.broadcast = function broadcast(data) {
 
   wss.clients.forEach(function each(client) {
     client.send(JSON.stringify(data));
-    console.log('------');
+    console.log('------+++++'+JSON.stringify(data));
   });
 };
 
