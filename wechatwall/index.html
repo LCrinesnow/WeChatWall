@@ -14,10 +14,10 @@
   <ul id="messages">
     
   </ul>
-<script type="text/javascript">
+<script>
+  console.log("+++++++++++++++");
   var msglist = document.getElementById('messages');
   var ws = new WebSocket('ws://coderwitkey.com:10001/');
-  console.log("+++++++++++++++");
   ws.onmessage = function(evt)
   {
     console.log(evt.data)
