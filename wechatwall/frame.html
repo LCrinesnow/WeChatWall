@@ -19,10 +19,10 @@
 <script type="text/javascript">
   var msglist = document.getElementById('messages');
   var ws = new WebSocket('ws://coderwitkey.com:10001/');
-  var toend = document.getElementById('toend')
+  var toend = document.getElementById('toend');
   ws.onmessage = function(evt)
   {
-    console.log(evt.data)
+    console.log('========'+evt.data);
     var msg = JSON.parse(evt.data);
     msg.user = msg.user || {};
     var userName = msg.user.nickname;
