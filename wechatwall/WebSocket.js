@@ -24,10 +24,10 @@ var replyText = require('./lib/reply').replyText;
 
 var wss = require('./lib/ws.js').wss;
 
-var express = require('express');
-app = express();
-app.use(express.static(__dirname));
-app.listen(require('./lib/config').indexPort);
+// var express = require('express');
+// app = express();
+// app.use(express.static(__dirname));
+// app.listen(require('./lib/config').indexPort);
 
 function checkSignature(params, token){
   //1. 将token、timestamp、nonce三个参数进行字典序排序
@@ -69,11 +69,10 @@ var server = http.createServer(function (request, response) {
       var parseString = require('xml2js').parseString;
 
       parseString(postdata, function (err, result) {
-         console.log('err'+result);
+         // console.log('err'+result);
 
         if(!err){
-                        console.log('if'+result);
-
+         // console.log('if'+result);
           if(result.xml.MsgType[0] === 'text'){
             getUserInfo(result.xml.FromUserName[0])
             .then(function(userInfo){
