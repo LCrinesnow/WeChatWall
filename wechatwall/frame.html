@@ -20,7 +20,7 @@
   var msglist = document.getElementById('messages');
   var ws = new WebSocket('ws://coderwitkey.com:10001/');
   var toend = document.getElementById('toend');
-      console.log("==================");
+      console.log("=================="+ws);
 
   ws.onmessage = function(evt)
   {
