@@ -1,7 +1,7 @@
 function replyText(msg, replyText){
-  if(msg.xml.MsgType[0] !== 'text'){
-    return '';
-  }
+  // if(msg.xml.MsgType[0] !== 'text'){
+  //   return '';
+  // }
   console.log(msg);
 
   //将要返回的消息通过一个简单的tmpl模板（npm install tmpl）返回微信
