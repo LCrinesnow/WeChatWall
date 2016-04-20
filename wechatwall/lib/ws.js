@@ -24,7 +24,10 @@ wss.broadcast = function broadcast(data) {
     console.log('------+++++'+JSON.stringify(data));
   });
 };
-
+ 
+wss.liu = function liu(d){
+       console.log('liu '+ d);
+}
 module.exports = {
   wss: wss
 };
