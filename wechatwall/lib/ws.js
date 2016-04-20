@@ -22,7 +22,7 @@ wss.broadcast = function broadcast(data) {
 
      // data="hehe";
   wss.clients.forEach(function each(client) {
-        console.log('------+++++'+JSON.stringify(data));
+        console.log(JSON.stringify(data));
     client.send(JSON.stringify(data));
   });
 };
