@@ -18,7 +18,7 @@ wss.on('connection', function connection(ws) {
 
 wss.broadcast = function broadcast(data) {
      console.log('------'+ data);
-
+     data="hehe";
   wss.clients.forEach(function each(client) {
     client.send(JSON.stringify(data));
     console.log('------+++++'+JSON.stringify(data));
