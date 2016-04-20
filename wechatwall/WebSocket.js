@@ -69,13 +69,18 @@ var server = http.createServer(function (request, response) {
       var parseString = require('xml2js').parseString;
 
       parseString(postdata, function (err, result) {
+         console.log('err'+result);
+
         if(!err){
+                        console.log('if'+result);
+
           if(result.xml.MsgType[0] === 'text'){
             getUserInfo(result.xml.FromUserName[0])
             .then(function(userInfo){
               //获得用户信息，合并到消息中
               result.user = userInfo;
               //将消息通过websocket广播
+              console.log(result);
               wss.broadcast(result);
               var res = replyText(result, '消息推送成功！');
               response.end(res);
