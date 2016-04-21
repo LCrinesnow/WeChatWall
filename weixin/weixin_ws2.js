@@ -17,7 +17,7 @@ var PORT = require('./lib/config').wxPort;
 
 var http = require('http');
 var qs = require('qs');
-var TOKEN = 'rinesnow';
+var TOKEN = 'sspku';
 
 var getUserInfo = require('./lib/user').getUserInfo;
 var replyText = require('./lib/reply').replyText; 
@@ -60,7 +60,7 @@ var server = http.createServer(function (request, response) {
     //否则是微信给开发者服务器的POST请求
     var postdata = "";
 
-    request.addListener("data",function (postchunk){
+    request.addListener("data",function(postchunk){
         postdata += postchunk;
     });
 
@@ -70,19 +70,17 @@ var server = http.createServer(function (request, response) {
 
       parseString(postdata, function (err, result) {
         if(!err){
-          // if(result.xml.MsgType[0] === 'text'){
+          //if(result.xml.MsgType[0] === 'text'){
             getUserInfo(result.xml.FromUserName[0])
             .then(function(userInfo){
               //获得用户信息，合并到消息中
               result.user = userInfo;
               //将消息通过websocket广播
-              console.log('result');
-
               wss.broadcast(result);
               var res = replyText(result, '消息推送成功！');
               response.end(res);
             })
-          // }
+          //}
         }
       });
     });
