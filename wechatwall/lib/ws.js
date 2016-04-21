@@ -16,18 +16,18 @@ wss.on('connection', function connection(ws) {
   console.log('new client connected.');
 });
 
-wss.broadcast = function broadcast(data) {
-     console.log('------'+ data.xml.MsgType[0]);
-     console.log(data);
+// wss.broadcast = function broadcast(data) {
+//      console.log('------'+ data.xml.MsgType[0]);
+//      console.log(data);
 
      // data="hehe";
   wss.broadcast = function broadcast(data) {
     wss.clients.forEach(function each(client) {
-                  console.log("==="+data);
+                  console.log(client.send(data));
       client.send(data);
     });
   };
-}
+
 //   wss.clients.forEach(function each(client) {
 
 //         console.log(JSON.stringify(data));
