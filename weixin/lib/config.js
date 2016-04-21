@@ -1,7 +1,7 @@
 //测试用的微信号，正式使用时请改为实际的appID和appSecret
 module.exports = {
-  appID: 'wx9e3f7f57074f3e22',
-  appSecret: 'c7240daea4ea243d541d39f6627bfc1d',
+  appID: 'wx75d11b4f981b1ded',
+  appSecret: '7a915c525f39451f3af19407012459ad',
   wxPort: 9529,
   wsPort: 10002,
   pgPort: 10001
