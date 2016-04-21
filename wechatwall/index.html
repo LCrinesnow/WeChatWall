@@ -15,22 +15,23 @@
     
   </ul>
 <script type="text/javascript">
-  console.log("+++++++++++++++");
-  var msglist = document.getElementById('messages');
-  var ws = new WebSocket('ws://coderwitkey.com:10001/');
-  ws.onmessage = function(evt)
-  {
-    console.log(evt.data)
-    var msg = JSON.parse(evt.data);
-    var content = msg.xml.Content[0];
-    msg.user = msg.user || {};
-    var userName = msg.user.nickname;
-    var headimg = msg.user.headimgurl;
+alert("muasdaksljd");
+  // console.log("+++++++++++++++");
+  // var msglist = document.getElementById('messages');
+  // var ws = new WebSocket('ws://coderwitkey.com:10001/');
+  // ws.onmessage = function(evt)
+  // {
+  //   console.log(evt.data)
+  //   var msg = JSON.parse(evt.data);
+  //   var content = msg.xml.Content[0];
+  //   msg.user = msg.user || {};
+  //   var userName = msg.user.nickname;
+  //   var headimg = msg.user.headimgurl;
 
-    var oLi = document.createElement('li');
-    oLi.innerHTML = userName + '<img src="'+headimg+'">' + '说:' + content;
-    msglist.appendChild(oLi);
-  };
+  //   var oLi = document.createElement('li');
+  //   oLi.innerHTML = userName + '<img src="'+headimg+'">' + '说:' + content;
+  //   msglist.appendChild(oLi);
+  // };
 </script>
 </body>
 </html>
