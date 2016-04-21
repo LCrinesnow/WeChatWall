@@ -10,12 +10,10 @@
   </style>
 </head>
 <body>
-    真他妈醉了
   <ul id="messages">
     
   </ul>
 <script type="text/javascript">
-  console.log("+++++++++++++++");
   var msglist = document.getElementById('messages');
   var ws = new WebSocket('ws://coderwitkey.com:10001/');
   ws.onmessage = function(evt)
@@ -26,14 +24,10 @@
     msg.user = msg.user || {};
     var userName = msg.user.nickname;
     var headimg = msg.user.headimgurl;
-
     var oLi = document.createElement('li');
     oLi.innerHTML = userName + '<img src="'+headimg+'">' + '说:' + content;
     msglist.appendChild(oLi);
-
   };
-      alert("muasdaksljd");
-
 </script>
 </body>
 </html>
