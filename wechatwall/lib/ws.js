@@ -21,13 +21,19 @@ wss.broadcast = function broadcast(data) {
      console.log(data);
 
      // data="hehe";
-  wss.clients.forEach(function each(client) {
-            console.log("========");
+  wss.broadcast = function broadcast(data) {
+    wss.clients.forEach(function each(client) {
+                  console.log("==="+data);
+      client.send(data);
+    });
+  };
+}
+//   wss.clients.forEach(function each(client) {
 
-        console.log(JSON.stringify(data));
-    client.send(JSON.stringify(data));
-  });
-};
+//         console.log(JSON.stringify(data));
+//     client.send(JSON.stringify(data));
+//   });
+// };
  
 // wss.liu = function liu(d){
 //        console.log('liu '+ d);
