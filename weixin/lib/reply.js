@@ -2,6 +2,7 @@ function replyText(msg, replyText){
   /*if(msg.xml.MsgType[0] !== 'text'){
     return '';
   }*/
+    console.log('replyText');
   console.log(msg);
 
   //将要返回的消息通过一个简单的tmpl模板（npm install tmpl）返回微信
@@ -9,7 +10,7 @@ function replyText(msg, replyText){
   var replyTmpl = '<xml>' +
     '<ToUserName><![CDATA[{toUser}]]></ToUserName>' +
     '<FromUserName><![CDATA[{fromUser}]]></FromUserName>' +
-    '<CreateTime><![CDATA[{time}]]></CreateTime>' +
+    '<CreateTime><{time}></CreateTime>' +
     '<MsgType><![CDATA[{type}]]></MsgType>' +
     '<Content><![CDATA[{content}]]></Content>' +
     '</xml>';
