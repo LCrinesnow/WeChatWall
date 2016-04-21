@@ -3,6 +3,7 @@ function replyText(msg, replyText){
     return '';
   }*/
   console.log(msg);
+  console.log('reply');
 
   //将要返回的消息通过一个简单的tmpl模板（npm install tmpl）返回微信
   var tmpl = require('tmpl');
