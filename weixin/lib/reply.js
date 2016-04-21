@@ -10,7 +10,7 @@ function replyText(msg, replyText){
   var replyTmpl = '<xml>' +
     '<ToUserName><![CDATA[{toUser}]]></ToUserName>' +
     '<FromUserName><![CDATA[{fromUser}]]></FromUserName>' +
-    '<CreateTime><{time}></CreateTime>' +
+    '<CreateTime><![CDATA[{time}]]></CreateTime>' +
     '<MsgType><![CDATA[{type}]]></MsgType>' +
     '<Content><![CDATA[{content}]]></Content>' +
     '</xml>';
