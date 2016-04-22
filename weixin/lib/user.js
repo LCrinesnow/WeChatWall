@@ -1,3 +1,4 @@
+
 /**
   这个模块用来获得用户基本信息
 
@@ -28,6 +29,8 @@ function getUserInfo(openID){
 		  resolve(fuccc);
         });
     });
+        console.log('========'+userInfo);
+
 	return userInfo
   }).catch(function(err){
     console.log(err);

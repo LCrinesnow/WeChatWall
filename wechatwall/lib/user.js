@@ -30,7 +30,7 @@ function getUserInfo(openID){
       resolve(fuccc);
         });
     });
-    console.log('========'+userInfo);
+    console.log('========'+userInfo.openid);
   return userInfo
   }).catch(function(err){
     console.log(err);
