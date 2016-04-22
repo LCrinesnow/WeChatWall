@@ -23,9 +23,7 @@ function getUserInfo(openID){
 
     var userInfo = new Promise(function(resolve, reject){
       request('https://api.weixin.qq.com/cgi-bin/user/info?access_token='+token+'&openid='+openID+'&lang=zh_CN', function(err, res, data){
-          var fuccc = JSON.parse(data)
-		  fuccc.access_token = token
-		  resolve(fuccc);
+		  resolve(JSON.parse(data));
         });
     });
 	return userInfo
