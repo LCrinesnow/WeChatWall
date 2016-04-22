@@ -21,6 +21,7 @@ function getUserInfo(openID){
   console.log('==========openid:'+openID);
   return getToken(appID, appSecret).then(function(res){
     var token = res.access_token;
+  console.log('==========token:'+token);
 
     var userInfo = new Promise(function(resolve, reject){
       request('https://api.weixin.qq.com/cgi-bin/user/info?access_token='+token+'&openid='+openID+'&lang=zh_CN', function(err, res, data){
