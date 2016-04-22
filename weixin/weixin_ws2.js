@@ -78,7 +78,11 @@ var server = http.createServer(function (request, response) {
               //将消息通过websocket广播
               wss.broadcast(result);
               var res = replyText(result, '消息推送成功！');
+              console.log('reszaizheli');
+
               console.log(res);
+                            console.log('reszaizhewan');
+
               response.end(res);
             })
           //}
