@@ -1,7 +1,7 @@
 function replyText(msg, replyText){
-  if(msg.xml.MsgType[0] !== 'text'){
-    return '';
-  }
+  // if(msg.xml.MsgType[0] !== 'text'){
+  //   return '';
+  // }
   console.log(msg);
 
   //将要返回的消息通过一个简单的tmpl模板（npm install tmpl）返回微信
@@ -13,14 +13,14 @@ function replyText(msg, replyText){
     '<MsgType><![CDATA[{type}]]></MsgType>' +
     '<Content><![CDATA[{content}]]></Content>' +
     '</xml>';
-
-  return tmpl(replyTmpl, {
+  var tmp = tmpl(replyTmpl, {
     toUser: msg.xml.FromUserName[0],
     fromUser: msg.xml.ToUserName[0],
     type: 'text',
     time: Date.now(),
     content: replyText
   });
+  return tmp;
 }
 
 module.exports = {

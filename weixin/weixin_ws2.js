@@ -55,8 +55,9 @@ var server = http.createServer(function (request, response) {
     //否则是微信给开发者服务器的POST请求
     var postdata = "";
 
-    request.addListener("data",function(postchunk){
+    request.addListener("data",function (postchunk){
         postdata += postchunk;
+        console.log(postdata);
     });
 
     //获取到了POST数据
