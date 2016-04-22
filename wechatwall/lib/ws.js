@@ -14,6 +14,8 @@ wss.on('connection', function connection(ws) {
 });
 
 wss.broadcast = function broadcast(data) {
+         console.log('========');
+
           console.log(data);
 
   wss.clients.forEach(function each(client) {
