@@ -14,11 +14,11 @@
 
 var request = require('request');
 var fs = require('fs');
+var Promise = require('promise');
 
 function getToken(appID, appSecret){
-  return new Promise(function(resolve, reject){
+    var promise = new Promise(function(resolve, reject){
     var token;
-
     //先看是否有token缓存，这里选择用文件缓存，可以用其他的持久存储作为缓存
     if(fs.existsSync('token.dat')){
       token = JSON.parse(fs.readFileSync('token.dat'));
@@ -40,6 +40,7 @@ function getToken(appID, appSecret){
     }
 
   });
+    return promise;
 }
 
 module.exports = {getToken: getToken};
