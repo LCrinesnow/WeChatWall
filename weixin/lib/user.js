@@ -1,4 +1,3 @@
-
 /**
   这个模块用来获得用户基本信息
 
@@ -22,16 +21,11 @@ function getUserInfo(openID){
   return getToken(appID, appSecret).then(function(res){
     var token = res.access_token;
 
-    var userInfo = new Promise(function(resolve, reject){
+    return new Promise(function(resolve, reject){
       request('https://api.weixin.qq.com/cgi-bin/user/info?access_token='+token+'&openid='+openID+'&lang=zh_CN', function(err, res, data){
-          var fuccc = JSON.parse(data)
-		  fuccc.access_token = token
-		  resolve(fuccc);
+          resolve(JSON.parse(data));
         });
     });
-        console.log('========'+userInfo.nickname);
-
-	return userInfo
   }).catch(function(err){
     console.log(err);
   });  
