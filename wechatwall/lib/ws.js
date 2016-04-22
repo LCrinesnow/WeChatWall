@@ -18,8 +18,9 @@ wss.broadcast = function broadcast(data) {
 
           console.log(data);
 
-  wss.clients.forEach(function each(client) {
-        console.log('========');
+  wss.clients.forEach(function each(client,data) {
+        console.log('++++++');
+        console.log(JSON.stringify(data));
     client.send(JSON.stringify(data));
   });
 };
