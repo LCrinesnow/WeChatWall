@@ -13,7 +13,7 @@ var getUserInfo = require('./lib/user').getUserInfo;
 var wss = require('./lib/ws').wss;
 
 
-var TOKEN = 'nicholas';
+var TOKEN = 'rinesnow';
 
 function checkSignature(params, token) {
 
