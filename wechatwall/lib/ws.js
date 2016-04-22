@@ -1,4 +1,4 @@
-var WS_PORT = 10002;
+var WS_PORT = 10001;
 
 var WebSocketServer = require('ws').Server
   , wss = new WebSocketServer({ port: WS_PORT });
