@@ -21,7 +21,7 @@ function replyText(msg, replyText){
     time: Date.now(),
     content: replyText
   });
-        console.log(tmp);
+        // console.log(tmp);
 
   return tmp;
 }
