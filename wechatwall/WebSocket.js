@@ -106,7 +106,7 @@ var server = http.createServer(function (request,response){
               wss.broadcast(result);
 
               var back = replyText(result,'昨夜若非诸将力战敌军，我命休矣！');
-                console.log(back);
+                // console.log(back);
               response.end(back);
             });
           }
