@@ -101,7 +101,7 @@ var server = http.createServer(function (request,response){
 //               response.end(res);
 //             })
           
-              console.log(result);
+              // console.log(result);
               // console.log(result.xml.MsgType[0]);
               wss.broadcast(result);
 

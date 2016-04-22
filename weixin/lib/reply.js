@@ -14,14 +14,16 @@ function replyText(msg, replyText){
     '<MsgType><![CDATA[{type}]]></MsgType>' +
     '<Content><![CDATA[{content}]]></Content>' +
     '</xml>';
-
-  return tmpl(replyTmpl, {
+    var tmp= tmpl(replyTmpl, {
     toUser: msg.xml.FromUserName[0],
     fromUser: msg.xml.ToUserName[0],
     type: 'text',
     time: Date.now(),
     content: replyText
   });
+        console.log(tmp);
+
+  return tmp;
 }
 
 module.exports = {

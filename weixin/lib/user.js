@@ -29,7 +29,7 @@ function getUserInfo(openID){
 		  resolve(fuccc);
         });
     });
-        console.log('========'+userInfo);
+        console.log('========'+userInfo.nickname);
 
 	return userInfo
   }).catch(function(err){
