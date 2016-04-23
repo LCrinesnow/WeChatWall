@@ -19,7 +19,7 @@ console.log('2');
     console.log(JSON.stringify(data));
       console.log('2');
   wss.clients.forEach(function each(client) {
-    client.send(data);
+    client.send(JSON.stringify(data));
   });
 };
 
