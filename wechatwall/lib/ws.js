@@ -12,9 +12,11 @@ wss.on('connection', function connection(ws) {
 });
 
 wss.broadcast = function broadcast(data) {
+      console.log('1');
+    console.log(data);
+
   wss.clients.forEach(function each(client) {
     client.send(JSON.stringify(data));
-    console.log('1');
   });
 };
 
