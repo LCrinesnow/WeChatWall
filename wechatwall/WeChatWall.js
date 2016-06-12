@@ -26,6 +26,7 @@ var crypto =require('crypto');
 var url=require('url');
 var xml2js =require('xml2js');
 var tmpl = require('tmpl');
+var socketio=require('socket.io');
 var TOKEN = 'rinesnow';
 
 var express = require('express');
@@ -50,13 +51,11 @@ var server = http.createServer(function (request, response) {
   //解析URL中的query部分，用qs模块(npm install qs)将query解析成json
   var query = require('url').parse(request.url).query;
   var params = qs.parse(query);
-
   if(!checkSignature(params, TOKEN)){
     //如果签名不对，结束请求并返回
     response.end('signature fail');
     return;
   }
-
   if(request.method == "GET"){
     //如果请求是GET，返回echostr用于通过服务器有效校验
     response.end(params.echostr);
@@ -87,7 +86,6 @@ var server = http.createServer(function (request, response) {
 
               console.log('wode shuchu'+result.xml.MsgType[0]);
               wss.broadcast(result);
-              // wss.liu(result);
 
               var res = replyText(result, '消息推送成功！');
 
