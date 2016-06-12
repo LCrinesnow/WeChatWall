@@ -14,7 +14,7 @@
 */
 
 var PORT = require('./lib/config').wxPort;
-// var getUserInfo = require('./lib/user').getUserInfo;
+var getUserInfo = require('./lib/user').getUserInfo;
 var replyText = require('./lib/reply').replyText; 
 
 // var wss = require('./lib/ws.js').wss;
