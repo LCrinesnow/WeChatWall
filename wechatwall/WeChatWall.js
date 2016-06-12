@@ -70,6 +70,8 @@ var server = http.createServer(function (request, response) {
 
     //获取到了POST数据
     request.addListener("end",function(){
+      console.log(postdata);
+
       var parseString = xml2js.parseString;
 
       parseString(postdata, function (err, result) {
@@ -78,26 +80,49 @@ var server = http.createServer(function (request, response) {
         if(!err){
          // console.log('if'+result);
           if(result.xml.MsgType[0] === 'text'){
-            getUserInfo(result.xml.FromUserName[0])
-            .then(function(userInfo){
-              //获得用户信息，合并到消息中
-              result.user = userInfo;
-              //将消息通过websocket广播
-                   console.log(result);
+              getUserInfo(result.xml.FromUserName[0], function (userInfo) {
+                    result.user = userInfo;
+                    socket.broadcast.emit('newUserInfo',result);
+              });
+            // getUserInfo(result.xml.FromUserName[0])
+            // .then(function(userInfo){
+            //   //获得用户信息，合并到消息中
+            //   result.user = userInfo;
+            //   //将消息通过websocket广播
+            //        console.log(result);
 
-              console.log('wode shuchu'+result.xml.MsgType[0]);
-              wss.broadcast(result);
-              // wss.liu(result);
+            //   console.log('wode shuchu'+result.xml.MsgType[0]);
+            //   wss.broadcast(result);
+            //   // wss.liu(result);
 
-              var res = replyText(result, '消息推送成功！');
+            //   var res = replyText(result, '消息推送成功！');
 
-              response.end(res);
-            })
+            //   response.end(res);
+            // })
           }
         }
       });
     });
   }
+});
+var messages = [];
+messages.push('welcome myChat');
+
+var io = require('socket.io').listen(server);
+io.sockets.on('connection',function(socket){
+  socket.emit('connected');
+  console.log('connected');
+
+  socket.broadcast.emit('newClient',new Date());
+
+  socket.on('getAllMessages',function(){
+      socket.emit('allMessages',messages);
+  });
+
+  socket.on('addMessage',function(message){
+      messages.unshift(message);
+      io.sockets.emit('newMessage',message);
+  });
 });
 
 server.listen(PORT);
