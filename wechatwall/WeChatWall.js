@@ -14,10 +14,10 @@
 */
 
 var PORT = require('./lib/config').wxPort;
-var getUserInfo = require('./lib/user').getUserInfo;
+// var getUserInfo = require('./lib/user').getUserInfo;
 var replyText = require('./lib/reply').replyText; 
 
-var wss = require('./lib/ws.js').wss;
+// var wss = require('./lib/ws.js').wss;
 
 // var PORT = 9529;
 var http = require('http');
@@ -83,9 +83,7 @@ var server = http.createServer(function (request, response) {
               getUserInfo(result.xml.FromUserName[0], function (userInfo) {
                     result.user = userInfo;
                     var res = replyText(result, '消息推送成功！');
-                                       console.log(result);
-
-
+                    console.log(result);
                     socket.broadcast.emit('newUserInfo',result);
                     response.end(res);
 
@@ -111,6 +109,23 @@ var server = http.createServer(function (request, response) {
     });
   }
 });
+
+function getUserInfo(openID,callback){
+    var token = asses_token.access_token;
+    request('https://api.weixin.qq.com/cgi-bin/user/info?access_token='+token+'&openid='+openID+'&lang=zh_CN', function(err, res, data){
+        callback(JSON.parse(data));
+        //resolve(JSON.parse(data));
+    });
+}
+
+// function getToken(appID, appSecret){
+//         request('https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='+appID+'&secret=' + appSecret, function(err, res, data){
+//              asses_token = JSON.parse(data);
+//              console.log(asses_token);
+//         });
+//     console.log('1');
+// }
+
 var messages = [];
 messages.push('welcome myChat');
 
