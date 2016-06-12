@@ -82,7 +82,13 @@ var server = http.createServer(function (request, response) {
           if(result.xml.MsgType[0] === 'text'){
               getUserInfo(result.xml.FromUserName[0], function (userInfo) {
                     result.user = userInfo;
+                    var res = replyText(result, '消息推送成功！');
+                                       console.log(result);
+
+
                     socket.broadcast.emit('newUserInfo',result);
+                    response.end(res);
+
               });
             // getUserInfo(result.xml.FromUserName[0])
             // .then(function(userInfo){
