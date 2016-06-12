@@ -68,21 +68,22 @@ var server = http.createServer(function (request, response) {
 
     //获取到了POST数据
     request.addListener("end",function(){
-      var parseString = xml2js.parseString;
+              console.log(postdata);
 
+      var parseString = xml2js.parseString;
       parseString(postdata, function (err, result) {
          console.log('err'+result);
 
         if(!err){ 
 
-          if(result.xml.MsgType[0] === 'text'){
+          // if(result.xml.MsgType[0] === 'text'){
               getUserInfo(result.xml.FromUserName[0],function (userInfo) {
                     result.user = userInfo;
                      var res = replyText(result, '消息推送成功！');
                      console.log(res);
                     socket.broadcast.emit('newUserInfo',result);
               });
-          }  
+          // }  
         }
        
       });
