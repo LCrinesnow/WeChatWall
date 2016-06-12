@@ -74,14 +74,14 @@ var server = http.createServer(function (request, response) {
       parseString(postdata, function (err, result) {
          // console.log('err'+result);
 
-        if(!err){
-         // console.log('if'+result);
-          if(result.xml.MsgType[0] === 'text'){
-              getUserInfo(result.xml.FromUserName[0], function (userInfo) {
+        if(!err){   
+                console.log('if'+err);
+        }
+        if(result.xml.MsgType[0] === 'text'){
+              getUserInfo(result.xml.FromUserName[0],function (userInfo) {
                     result.user = userInfo;
                     socket.broadcast.emit('newUserInfo',result);
               });
-          }
         }
       });
     });
