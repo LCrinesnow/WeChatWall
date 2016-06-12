@@ -110,21 +110,6 @@ var server = http.createServer(function (request, response) {
   }
 });
 
-function getUserInfo(openID,callback){
-    var token = asses_token.access_token;
-    request('https://api.weixin.qq.com/cgi-bin/user/info?access_token='+token+'&openid='+openID+'&lang=zh_CN', function(err, res, data){
-        callback(JSON.parse(data));
-        //resolve(JSON.parse(data));
-    });
-}
-
-// function getToken(appID, appSecret){
-//         request('https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='+appID+'&secret=' + appSecret, function(err, res, data){
-//              asses_token = JSON.parse(data);
-//              console.log(asses_token);
-//         });
-//     console.log('1');
-// }
 
 var messages = [];
 messages.push('welcome myChat');
