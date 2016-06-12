@@ -50,11 +50,13 @@ var server = http.createServer(function (request, response) {
   //解析URL中的query部分，用qs模块(npm install qs)将query解析成json
   var query = require('url').parse(request.url).query;
   var params = qs.parse(query);
+
   if(!checkSignature(params, TOKEN)){
     //如果签名不对，结束请求并返回
     response.end('signature fail');
     return;
   }
+
   if(request.method == "GET"){
     //如果请求是GET，返回echostr用于通过服务器有效校验
     response.end(params.echostr);
@@ -68,47 +70,34 @@ var server = http.createServer(function (request, response) {
 
     //获取到了POST数据
     request.addListener("end",function(){
-              console.log(postdata);
-
       var parseString = xml2js.parseString;
+
       parseString(postdata, function (err, result) {
-         console.log('err'+result);
+         // console.log('err'+result);
 
-        if(!err){ 
+        if(!err){
+         // console.log('if'+result);
+          if(result.xml.MsgType[0] === 'text'){
+            getUserInfo(result.xml.FromUserName[0])
+            .then(function(userInfo){
+              //获得用户信息，合并到消息中
+              result.user = userInfo;
+              //将消息通过websocket广播
+                   console.log(result);
 
-          // if(result.xml.MsgType[0] === 'text'){
-              getUserInfo(result.xml.FromUserName[0],function (userInfo) {
-                    result.user = userInfo;
-                     var res = replyText(result, '消息推送成功！');
-                     console.log(res);
-                    socket.broadcast.emit('newUserInfo',result);
-              });
-          // }  
+              console.log('wode shuchu'+result.xml.MsgType[0]);
+              wss.broadcast(result);
+              // wss.liu(result);
+
+              var res = replyText(result, '消息推送成功！');
+
+              response.end(res);
+            })
+          }
         }
-       
       });
     });
   }
-});
-
-var messages = [];
-messages.push('newClient');
-
-var io = require('socket.io').listen(server);
-io.sockets.on('connection',function(socket){
-  socket.emit('connected');
-  console.log('connected');
-
-  socket.broadcast.emit('newClient',new Date());
-
-  socket.on('getAllMessages',function(){
-      socket.emit('allMessages',messages);
-  });
-
-  socket.on('addMessage',function(message){
-      messages.unshift(message);
-      io.sockets.emit('newMessage',message);
-  });
 });
 
 server.listen(PORT);
