@@ -30,6 +30,14 @@ var TOKEN = 'rinesnow';
 var express = require('express');
 app = express();
 app.use(express.static(__dirname));
+
+var messages = [];
+messages.push('欢迎你来到myChat!');
+
+
+app.use(function(req, res) {
+    res.sendFile(__dirname + '/client/index.html');
+});
 app.listen(require('./lib/config').indexPort);
 
 function checkSignature(params, token){
