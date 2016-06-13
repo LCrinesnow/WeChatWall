@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>weChatWall</title>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="/assets/bower_components/angular/angular.min.js"></script>
+</head>
+<body>
+<div ng-app="app" ng-controller="ctrl" >
+    <input type="text" ng-model="msg1" placeholder="请输入文字">
+    <button ng-click="toggle()">发送</button>
+
+    <ul>
+        <li ng-repeat="message in messages track by $index">
+            {{message}}
+        </li>
+    </ul>
+</div>
+    <script type="text/javascript">
+        // 创 建 模 型
+        var app = angular.module('app', []);
+
+        app.controller('ctrl',function($scope){
+            var Msgs = [];
+            var socket = io.connect('/');
+
+            socket.on('newUserInfo',function(info){
+                console.log(info.data);
+                var msg = JSON.parse(info.data);
+                var content = msg.xml.Content[0];
+                var userName = msg.user.nickname;
+                //var headimg = msg.user.headimgurl;
+                var fullMsg = userName + ':' + content;
+                console.log(fullMsg);
+                Msgs.unshift(fullMsg);
+                $scope.$apply(function() {
+                    $scope.messages = Msgs;
+                });
+            });
+
+
+            socket.emit('getAllMessages');
+
+            socket.on('connected',function(){
+                console.log('myChat is online');
+            });
+
+            socket.on('newClient',function(socket){
+                console.log('newClient',socket);
+            });
+
+            socket.on('allMessages',function(message){
+                console.log('allMessages',message);
+                Msgs = message.slice();
+                $scope.$apply(function() {
+                    $scope.messages = Msgs;
+                });
+            });
+
+            socket.on('newMessage',function(message){
+                console.log('get a new message',message);
+                Msgs.unshift(message);
+                $scope.$apply(function() {
+                    $scope.messages = Msgs;
+                });
+            });
+            $scope.toggle = function () {
+                socket.emit('addMessage',$scope.msg1);
+            };
+
+        });
+
+
+    </script>
+</body>
+</html>
