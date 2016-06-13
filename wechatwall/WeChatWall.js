@@ -85,9 +85,11 @@ var server = http.createServer(function (request, response) {
               getUserInfo(result.xml.FromUserName[0]).then(function (userInfo) {
                     var res = replyText(result, '消息推送成功！');
                     result.user = userInfo;
-                    
+
                     console.log(result);
-                    socket.broadcast.emit('newUserInfo',result);
+                    io.sockets.emit('newMessage', result);
+                    res.sendFile(__dirname + '/client/index.html');
+
                     response.end(res);
 
 
