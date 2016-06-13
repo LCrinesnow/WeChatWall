@@ -1,74 +1,116 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
 <head>
     <meta charset="UTF-8">
-    <title>weChatWall</title>
+    <title>myChat</title>
+
+    <link rel="stylesheet" href="/client/assets/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/client/assets/css/font-awesome.css"/>
+    <link rel="stylesheet" href="/client/assets/css/ace.css" class="ace-main-stylesheet" id="main-ace-style"/>
+
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
-    <script type="text/javascript" src="/assets/bower_components/angular/angular.min.js"></script>
+    <script type="text/javascript" src="/client/assets/bower_components/angular/angular.min.js"></script>
 </head>
-<body>
-<div ng-app="app" ng-controller="ctrl" >
-    <input type="text" ng-model="msg1" placeholder="请输入文字">
-    <button ng-click="toggle()">发送</button>
+<body ng-controller="ctrl">
 
-    <ul>
-        <li ng-repeat="message in messages track by $index">
-            {{message}}
-        </li>
-    </ul>
+<div class="row">
+    <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+        <h1 class="header blue lighter">
+            myChat Room
+        </h1>
+    </div>
+
 </div>
-    <script type="text/javascript">
-        // 创 建 模 型
-        var app = angular.module('app', []);
 
-        app.controller('ctrl',function($scope){
+<div class="row">
+    <div class="input-append col-xs-12 col-sm-8 col-sm-offset-2">
+        <input class="col-xs-8" id="appendedInputButton" style="margin-left: 10%; margin-top: 1%" type="text" ng-model="msg" placeholder="请输入文字">&nbsp;
+        <button class="btn btn-success btn-small" ng-click="toggle()">发送</button>
+    </div>
+</div>
+
+
+    <div>
+        <p> </p>
+        <p> </p>
+        <p> </p>
+        <p> </p>
+
+        <ul id="messages">
+            <li ng-repeat="message in messages">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+                        <div class="itemdiv dialogdiv">
+                            <div class="user">
+                                <img src="{{message.headimg}}">
+                            </div>
+                            <div class="body">
+                                <div class="name">
+                                    <a href="#">{{message.username}}</a>
+                                </div>
+                                <div class="text">{{message.content}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </li>
+
+        </ul>
+    </div>
+
+    <script type="text/javascript">
+
+        //创建模型
+        var app = angular.module('app',[]);
+
+        //创建控制器
+        app.controller('ctrl', function ($scope) {
             var Msgs = [];
             var socket = io.connect('/');
 
-            socket.on('newUserInfo',function(info){
-                console.log(info.data);
-                var msg = JSON.parse(info.data);
-                var content = msg.xml.Content[0];
-                var userName = msg.user.nickname;
-                //var headimg = msg.user.headimgurl;
-                var fullMsg = userName + ':' + content;
-                console.log(fullMsg);
-                Msgs.unshift(fullMsg);
-                $scope.$apply(function() {
-                    $scope.messages = Msgs;
-                });
-            });
-
-
             socket.emit('getAllMessages');
 
-            socket.on('connected',function(){
-                console.log('myChat is online');
+            socket.on('connected', function () {
+                console.log('connected: connected to myChat');
             });
 
-            socket.on('newClient',function(socket){
-                console.log('newClient',socket);
+            socket.on('newChat', function (socket) {
+                console.log('newClient: ',socket);
             });
 
-            socket.on('allMessages',function(message){
-                console.log('allMessages',message);
-                Msgs = message.slice();
-                $scope.$apply(function() {
+            socket.on('allMessages', function (messages) {
+                console.log('allMessages -> messages: ',messages);
+                Msgs = messages.slice();
+                $scope.$apply(function () {
                     $scope.messages = Msgs;
                 });
             });
 
-            socket.on('newMessage',function(message){
-                console.log('get a new message',message);
-                Msgs.unshift(message);
-                $scope.$apply(function() {
+            socket.on('newMessage', function (message) {
+                console.log('Get a new message: ',message);
+                var item = {
+                    username: 'PC',
+                    headimg: '/client/catrabbit.jpg',
+                    content: message
+                };
+                if (message.xml != null) {
+                    item = {
+                        username: message.user.nickname,
+                        headimg: message.user.headimgurl,
+                        content: message.xml.Content[0]
+                    };
+                }
+
+                Msgs.unshift(item);
+                $scope.$apply(function () {
                     $scope.messages = Msgs;
                 });
             });
+
             $scope.toggle = function () {
-                socket.emit('addMessage',$scope.msg1);
+                socket.emit('addMessage',$scope.msg);
             };
-
         });
 
 
