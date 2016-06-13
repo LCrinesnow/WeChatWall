@@ -79,29 +79,31 @@ var server = http.createServer(function (request, response) {
         if(!err){
          // console.log('if'+result);
           if(result.xml.MsgType[0] === 'text'){
+            var res = replyText(result, '消息推送成功！');
+            response.end(res);
+
               // getUserInfo(result.xml.FromUserName[0], function (userInfo) {
               //       result.user = userInfo;
-              //       var res = replyText(result, '消息推送成功！');
+                    
               //       console.log(result);
               //       socket.broadcast.emit('newUserInfo',result);
-              //       response.end(res);
 
-              // });
-            getUserInfo(result.xml.FromUserName[0])
-            .then(function(userInfo){
-              //获得用户信息，合并到消息中
-              result.user = userInfo;
-              //将消息通过websocket广播
-                   console.log(result);
+              // })
+            // getUserInfo(result.xml.FromUserName[0])
+            // .then(function(userInfo){
+            //   //获得用户信息，合并到消息中
+            //   result.user = userInfo;
+            //   //将消息通过websocket广播
+            //        console.log(result);
 
-              console.log('wode shuchu'+result.xml.MsgType[0]);
-              wss.broadcast(result);
-              // wss.liu(result);
+            //   console.log('wode shuchu'+result.xml.MsgType[0]);
+            //   wss.broadcast(result);
+            //   // wss.liu(result);
 
-              var res = replyText(result, '消息推送成功！');
+            //   var res = replyText(result, '消息推送成功！');
 
-              response.end(res);
-            })
+            //   response.end(res);
+            // })
           }
         }
       });
