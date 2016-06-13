@@ -81,6 +81,7 @@ var server = http.createServer(function (request, response) {
           if(result.xml.MsgType[0] === 'text'){
             var res = replyText(result, '消息推送成功！');
             response.end(res);
+            console.log(result);
 
               // getUserInfo(result.xml.FromUserName[0], function (userInfo) {
               //       result.user = userInfo;
