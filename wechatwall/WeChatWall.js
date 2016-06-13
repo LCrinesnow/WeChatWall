@@ -17,9 +17,8 @@ var PORT = require('./lib/config').wxPort;
 var getUserInfo = require('./lib/user').getUserInfo;
 var replyText = require('./lib/reply').replyText; 
 
-// var wss = require('./lib/ws.js').wss;
+var wss = require('./lib/ws.js').wss;
 
-// var PORT = 9529;
 var http = require('http');
 var qs = require('qs');
 var crypto =require('crypto');
