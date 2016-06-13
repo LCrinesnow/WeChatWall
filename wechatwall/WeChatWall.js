@@ -82,7 +82,7 @@ var server = http.createServer(function (request, response) {
            
             console.log(result.xml.FromUserName[0]);
 
-              getUserInfo(result.xml.FromUserName[0].then(function (userInfo) {
+              getUserInfo(result.xml.FromUserName[0]).then(function (userInfo) {
                     var res = replyText(result, '消息推送成功！');
                     result.user = userInfo;
                     console.log(result);
