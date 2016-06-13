@@ -62,7 +62,7 @@ app.use('/',function (req, res) {
 
                                 messages.unshift(result);
                                 //console.log('messages:',messages);
-                                io.sockets.emit('newMessage', result);
+                                socket.broadcast.emit('newMessage', result);
                                 //wss.broadcast(result);
                                 var reply = replyText(result, '消息发送成功');
 
