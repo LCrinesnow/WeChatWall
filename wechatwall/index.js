@@ -9,8 +9,8 @@ app.use(function(req, res) {
     res.sendFile(__dirname + '/client/index.html');
 });
 
-var server = app.listen(3000, function () {
-    console.log('app is running at port 3000 !');
+var server = app.listen(10001, function () {
+    console.log('app is running at port 10001 !');
 });
 
 var io = socketio.listen(server);
