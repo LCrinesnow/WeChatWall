@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>MyChat</title>
+
+    <link rel="stylesheet" href="/client/assets/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/client/assets/css/font-awesome.css"/>
+    <link rel="stylesheet" href="/client/assets/css/ace.css" class="ace-main-stylesheet" id="main-ace-style"/>
+    <style>
+        .qrcode_area img {
+            width: 120px;
+        }
+    </style>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="/client/assets/bower_components/angular/angular.min.js"></script>
+</head>
+<body ng-controller="ctrl">
+
+<div class="row">
+    <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+        <h1 class="page-header purple ">
+        想说啥都可以聊天室
+    </h1>
+        <h1 class=" ">
+            &nbsp
+        </h1>
+    </div>
+    <span class="fans_area_item qrcode_area">
+                <img src="/client/wechat.jpg" alt="二维码">
+                <p>扫一扫加入我的聊天</p>
+    </span>
+</div>
+
+<div class="row">
+    <div class="input-append col-xs-12 col-sm-8 col-sm-offset-2">
+        <input class="col-xs-8" id="appendedInputButton" style="margin-left: 10%; margin-top: 1%" type="text" ng-model="msg" placeholder="请输入文字">&nbsp;
+        <button class="btn  btn-purple" ng-click="toggle()">发送</button>
+
+    </div>
+
+</div>
+
+
+    <div>
+        <p> </p>
+        <p> </p>
+        <p> </p>
+        <p> </p>
+
+        <ul id="messages">
+            <li ng-repeat="message in messages">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+                        <div class="itemdiv dialogs">
+                            <div class="user">
+                                <img src="{{message.headimg}}">
+                            </div>
+                            <div class="body red">
+                                <div class="name">
+                                    <a href="#">{{message.username}}</a>
+                                </div>
+                                <div class="text">{{message.content}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </li>
+
+        </ul>
+    </div>
+
+    <script type="text/javascript">
+
+        //创建模型
+        var app = angular.module('app',[]);
+
+        //创建控制器
+        app.controller('ctrl', function ($scope) {
+            var Msgs = [];
+            var socket = io.connect('/');
+
+            socket.emit('getAllMessages');
+
+            socket.on('connected', function () {
+                console.log('connected: connected to myChat');
+            });
+
+            socket.on('newChat', function (socket) {
+                console.log('newClient: ',socket);
+            });
+
+            socket.on('allMessages', function (messages) {
+                console.log('allMessages -> messages: ',messages);
+                Msgs = messages.slice();
+                $scope.$apply(function () {
+                    $scope.messages = Msgs;
+                });
+            });
+
+            socket.on('newMessage', function (message) {
+                console.log('Get a new message: ',message);
+                var item = {
+                    username: 'PC',
+                    headimg: '/client/1.jpg',
+                    content: message
+                };
+                if (message.xml != null) {
+                    item = {
+                        username: message.user.nickname,
+                        headimg: message.user.headimgurl,
+                        content: message.xml.Content[0]
+                    };
+                }
+
+                Msgs.unshift(item);
+                $scope.$apply(function () {
+                    $scope.messages = Msgs;
+                });
+            });
+
+            $scope.toggle = function () {
+                socket.emit('addMessage',$scope.msg);
+            };
+        });
+
+
+    </script>
+</body>
+</html>
