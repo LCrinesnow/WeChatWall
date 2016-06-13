@@ -62,15 +62,13 @@ app.use('/',function (req, res) {
 
                                 messages.unshift(result);
                                 //console.log('messages:',messages);
-                                socket.broadcast.emit('newMessage', result);
+                                io.socket.emit('newMessage', result);
                                 //wss.broadcast(result);
                                 var reply = replyText(result, '消息发送成功');
 
-                                //res.end('hello');
                                 res.sendFile(__dirname + '/client/index.html');
                             });
                     }
-                    //res.end('hello');
                 }
 
             });
