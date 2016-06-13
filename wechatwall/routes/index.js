@@ -4,7 +4,7 @@ var http = require('http');
 var qs = require('qs');
 var later = require('later');
 var request = require('request');
-var TOKEN = 'wenzt';
+var TOKEN = 'rinesnow';
 
 app.use(express.static('./wechatwall/views'));
 
