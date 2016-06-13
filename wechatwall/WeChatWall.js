@@ -79,17 +79,18 @@ var server = http.createServer(function (request, response) {
         if(!err){
          // console.log('if'+result);
           if(result.xml.MsgType[0] === 'text'){
-            var res = replyText(result, '消息推送成功！');
-            response.end(res);
-            console.log(result);
+           
+            console.log(result.xml.FromUserName[0]);
 
-              // getUserInfo(result.xml.FromUserName[0], function (userInfo) {
-              //       result.user = userInfo;
-                    
-              //       console.log(result);
-              //       socket.broadcast.emit('newUserInfo',result);
+              getUserInfo(result.xml.FromUserName[0].then(function (userInfo) {
+                    var res = replyText(result, '消息推送成功！');
+                    result.user = userInfo;
+                    console.log(result);
+                    socket.broadcast.emit('newUserInfo',result);
+                    response.end(res);
 
-              // })
+
+              })
             // getUserInfo(result.xml.FromUserName[0])
             // .then(function(userInfo){
             //   //获得用户信息，合并到消息中
