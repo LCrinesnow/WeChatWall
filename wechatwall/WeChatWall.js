@@ -135,8 +135,8 @@ io.sockets.on('connection',function(socket){
       io.sockets.emit('newMessage',message);
   });
 });
-server.listen(9529,function(){
-    console.log('listen');
-});
+// server.listen(9529,function(){
+//     console.log('listen');
+// });
 
 console.log("Weixin server runing at port: " + PORT + ".");
