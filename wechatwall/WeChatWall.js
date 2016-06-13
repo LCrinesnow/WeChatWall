@@ -85,10 +85,9 @@ var server = http.createServer(function (request, response) {
               getUserInfo(result.xml.FromUserName[0]).then(function (userInfo) {
                     var res = replyText(result, '消息推送成功！');
                     result.user = userInfo;
-                                //console.log('messages:',messages);
-                    socket.broadcast.emit('newUserInfo',result);
-
+                    
                     console.log(result);
+                    socket.broadcast.emit('newUserInfo',result);
                     response.end(res);
 
 
@@ -135,8 +134,7 @@ io.sockets.on('connection',function(socket){
       io.sockets.emit('newMessage',message);
   });
 });
-// server.listen(9529,function(){
-//     console.log('listen');
-// });
+
+server.listen(PORT);
 
 console.log("Weixin server runing at port: " + PORT + ".");
