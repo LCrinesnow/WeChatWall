@@ -59,14 +59,15 @@ app.use('/',function (req, res) {
                                 result.user = userInfo;
                                 //console.log('user info:',userInfo);
                                 //将消息通过websocket广播
-
+                                var reply = replyText(result, '消息发送成功');
+                                response.end(reply);
                                 messages.unshift(result);
                                 //console.log('messages:',messages);
                                 io.sockets.emit('newMessage', result);
                                 //wss.broadcast(result);
-                                var reply = replyText(result, '消息发送成功');
+                                
+
                                 res.sendFile(__dirname + '/client/index.html');
-                                response.end(reply);
 
                             });
                     }
