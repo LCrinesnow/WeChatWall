@@ -28,7 +28,7 @@
 <div class="row">
     <div class="input-append col-xs-12 col-sm-8 col-sm-offset-2">
         <input class="col-xs-8" id="appendedInputButton" style="margin-left: 10%; margin-top: 1%" type="text" ng-model="msg" placeholder="请输入文字">&nbsp;
-        <button ng-click="toggle()">发送</button>
+        <button class="btn btn-success btn-small" ng-click="toggle()">发送</button>
 
     </div>
 
@@ -46,9 +46,12 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-8 col-sm-offset-2">
                         <div class="itemdiv dialogs">
-                        
-                          
-                               {{message.username}}说：{{message.content}}
+                          <%if(message==message){%>
+                              
+                          <%}else {%>
+                                {{message.username}}说：{{message.content}}
+                          <%} %>
+                               
                         
                         </div>
                     </div>
@@ -90,14 +93,12 @@
             socket.on('newMessage', function (message) {
                 console.log('Get a new message: ',message);
                 var item = {
-                    username: 'PC',
-                    headimg: '/client/1.jpg',
+                    username: 'laptop',
                     content: message
                 };
                 if (message.xml != null) {
                     item = {
                         username: message.user.nickname,
-                        headimg: message.user.headimgurl,
                         content: message.xml.Content[0]
                     };
                 }

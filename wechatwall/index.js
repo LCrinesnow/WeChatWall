@@ -62,7 +62,7 @@ app.use('/',function (req, res) {
 
                                 messages.unshift(result);
                                 //console.log('messages:',messages);
-                                io.socket.emit('newMessage', result);
+                                io.sockets.emit('newMessage', result);
                                 //wss.broadcast(result);
                                 var reply = replyText(result, '消息发送成功');
 
@@ -94,9 +94,10 @@ io.sockets.on('connection', function(socket){
         socket.emit('allMessage',messages);
     });
 
-    socket.on('addMessage', function (message) {
-        messages.unshift(message);
-        io.sockets.emit('newMessage', message);
-    });
+    // socket.on('addMessage', function (message) {
+    //     messages.unshift(message);
+    //     io.sockets.emit('newMessage', message);
+    // });
+
 });
 
