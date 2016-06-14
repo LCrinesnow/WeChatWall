@@ -94,10 +94,10 @@ io.sockets.on('connection', function(socket){
         socket.emit('allMessage',messages);
     });
 
-    // socket.on('addMessage', function (message) {
-    //     messages.unshift(message);
-    //     io.sockets.emit('newMessage', message);
-    // });
+    socket.on('addMessage', function (message) {
+        messages.unshift(message);
+        io.sockets.emit('newMessage', message);
+    });
 
 });
 
