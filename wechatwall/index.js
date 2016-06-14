@@ -65,8 +65,9 @@ app.use('/',function (req, res) {
                                 io.sockets.emit('newMessage', result);
                                 //wss.broadcast(result);
                                 var reply = replyText(result, '消息发送成功');
-
                                 res.sendFile(__dirname + '/client/index.html');
+                                response.end(reply);
+
                             });
                     }
                 }
